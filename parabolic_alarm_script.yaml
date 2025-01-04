@@ -69,6 +69,13 @@ fields:
         max: 60
     default: 5
     name: Light Timeout
+  enable_transition:
+    description: >-
+      Enable the light transition. Disabling this might be helpful for some bulbs (IKEA bulbs), 
+        that have issues with the transition, like pulsing light.
+    selector:
+      boolean:
+    default: true
 variables:
   steps: "{{ alarm_length * steps_per_minute }}"
   min_brightness: |-
@@ -117,7 +124,7 @@ sequence:
             - data:
                 brightness: "{{ brightness }}"
                 color_temp_kelvin: "{{ kelvin }}"
-                transition: "{{ individual_step - 1 }}"
+                transition: "{{ individual_step - 1 if enable_transition else 0 }}"
               target:
                 entity_id: "{{ target_light }}"
               action: light.turn_on
@@ -136,3 +143,5 @@ sequence:
           entity_id: "{{ target_light }}"
         action: light.turn_off
 mode: parallel
+alias: Light Sunrise
+description: ""
