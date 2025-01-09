@@ -70,9 +70,10 @@ fields:
     default: 5
     name: Light Timeout
   enable_transition:
+    name: Enable transition
     description: >-
       Enable the light transition. Disabling this might be helpful for some bulbs (IKEA bulbs), 
-        that have issues with the transition, like pulsing light.
+      that have issues with the transition, like pulsing light
     selector:
       boolean:
     default: true
