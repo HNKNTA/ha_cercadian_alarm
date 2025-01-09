@@ -39,6 +39,14 @@ blueprint:
         number:
           min: 1
           max: 60
+    enable_transition:
+      name: Enable transition
+      description: >-
+        Enable the light transition. Disabling this might be helpful for some bulbs (IKEA bulbs), 
+        that have issues with the transition, like pulsing light
+      selector:
+        boolean:
+      default: true
     steps_per_minute:
       name: Steps per minute for all runs
       description: Used for configuring percentage of each step for brightness and color temperature
@@ -159,6 +167,7 @@ action:
       steps_per_minute: !input steps_per_minute
       light_timeout: 0
       target_light: !input target_light
+      enable_transition: !input enable_transition
 
   - if:
       - condition: state
@@ -174,6 +183,7 @@ action:
           steps_per_minute: !input steps_per_minute
           light_timeout: 0
           target_light: !input target_light
+          enable_transition: !input enable_transition
   - if:
       - condition: state
         state: "on"
@@ -188,5 +198,6 @@ action:
           steps_per_minute: !input steps_per_minute
           light_timeout: !input light_timeout
           target_light: !input target_light
+          enable_transition: !input enable_transition
 mode: parallel
 max: 10
